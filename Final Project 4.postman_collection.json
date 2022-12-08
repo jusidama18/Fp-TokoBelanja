@@ -1,0 +1,638 @@
+{
+	"info": {
+		"_postman_id": "27e4edf6-3840-48a7-b690-8dcc7038a351",
+		"name": "Final Project 4",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16432785"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"full_name\" : \"Final Project 4\",\r\n    \"email\" : \"finalp4@gmail.com\",\r\n    \"password\" : \"final12345\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Register",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"full_name\" : \"Final Project 4\",\r\n    \"email\" : \"finalp4@gmail.com\",\r\n    \"password\" : \"final12345\"\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/users/register",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"users",
+										"register"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 07 Dec 2022 15:02:12 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "248"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": 201,\n    \"message\": \"created\",\n    \"data\": {\n        \"id\": 3,\n        \"full_name\": \"Final Project 4\",\n        \"email\": \"finalp4@gmail.com\",\n        \"password\": \"$2a$04$a8SfYF7Oq5V323XkwcyXGuG9O5dJVx.YBfKi9GRi3bavGj9OTo97W\",\n        \"balance\": 0,\n        \"created_at\": \"2022-12-07T22:02:12.0445143+07:00\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Login",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"admin@gmail.com\",\r\n    \"password\" : \"admin12345\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\" : \"finalp4@gmail.com\",\r\n    \"password\" : \"final12345\"\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/users/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"users",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 07 Dec 2022 15:02:43 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "183"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": 200,\n    \"message\": \"ok\",\n    \"data\": {\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjozLCJyb2xlX3VzZXIiOiJjdXN0b21lciJ9.ndVtFkG-i3c6Qj8Xar1HXkIvJ1no6bI7fcVgoHru8j8\"\n    }\n}"
+						},
+						{
+							"name": "Login Admin",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\" : \"admin@gmail.com\",\r\n    \"password\" : \"admin12345\"\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/users/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"users",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 07 Dec 2022 15:04:53 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "179"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": 200,\n    \"message\": \"ok\",\n    \"data\": {\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjo0LCJyb2xlX3VzZXIiOiJhZG1pbiJ9.XV2q-gTMO_nAGyylP4-3IRvdgQIbXVy5N3dWVqTtBWI\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Topup",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjozLCJyb2xlX3VzZXIiOiJjdXN0b21lciJ9.ndVtFkG-i3c6Qj8Xar1HXkIvJ1no6bI7fcVgoHru8j8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"balance\" : 200000\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/topup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"topup"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Topup",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"balance\" : 200000\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/users/topup",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"users",
+										"topup"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 07 Dec 2022 15:03:06 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "112"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": 200,\n    \"message\": \"ok\",\n    \"data\": {\n        \"message\": \"Your balance has been succcessfully updated to Rp 200000\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"full_name\" : \"Admin \",\r\n    \"email\" : \"admin@gmail.com\",\r\n    \"password\" : \"admin12345\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/admin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"admin"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Admin",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"full_name\" : \"Admin \",\r\n    \"email\" : \"admin@gmail.com\",\r\n    \"password\" : \"admin12345\"\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/users/admin",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"users",
+										"admin"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 07 Dec 2022 15:03:46 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "237"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": 201,\n    \"message\": \"created\",\n    \"data\": {\n        \"id\": 4,\n        \"full_name\": \"Admin \",\n        \"email\": \"admin@gmail.com\",\n        \"password\": \"$2a$04$wvpP.PTxOI.3rExhG1SYtuA1L40R.Z0z2WbGc4ikVC/2kNLTF8Pw2\",\n        \"balance\": 0,\n        \"created_at\": \"2022-12-07T22:03:46.1869803+07:00\"\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "Add Category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjo0LCJyb2xlX3VzZXIiOiJhZG1pbiJ9.XV2q-gTMO_nAGyylP4-3IRvdgQIbXVy5N3dWVqTtBWI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"type\" : \"Belanja\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/categories",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"categories"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Add Category",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"type\" : \"Belanja\"\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/categories",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"categories"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 07 Dec 2022 15:05:23 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "145"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": 201,\n    \"message\": \"created\",\n    \"data\": {\n        \"id\": 2,\n        \"type\": \"Belanja\",\n        \"sold_product_amount\": 0,\n        \"created_at\": \"2022-12-07T22:05:23.5943882+07:00\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjo0LCJyb2xlX3VzZXIiOiJhZG1pbiJ9.XV2q-gTMO_nAGyylP4-3IRvdgQIbXVy5N3dWVqTtBWI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/categories",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"categories"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Category",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/categories",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"categories"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 07 Dec 2022 15:05:40 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "514"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": 200,\n    \"message\": \"ok\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"type\": \"Final Test 3\",\n            \"sold_product_amount\": 0,\n            \"created_at\": \"2022-12-03T10:59:31.413599+07:00\",\n            \"updated_at\": \"2022-12-03T11:00:31.09485+07:00\",\n            \"Products\": [\n                {\n                    \"id\": 1,\n                    \"title\": \"Pakaian\",\n                    \"price\": 200000,\n                    \"stock\": 6,\n                    \"created_at\": \"2022-12-03T19:13:39.978545+07:00\",\n                    \"updated_at\": \"2022-12-03T19:14:11.605645+07:00\"\n                }\n            ]\n        },\n        {\n            \"id\": 2,\n            \"type\": \"Belanja\",\n            \"sold_product_amount\": 0,\n            \"created_at\": \"2022-12-07T22:05:23.594388+07:00\",\n            \"updated_at\": \"2022-12-07T22:05:23.594388+07:00\",\n            \"Products\": []\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Pacth Category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjo0LCJyb2xlX3VzZXIiOiJhZG1pbiJ9.XV2q-gTMO_nAGyylP4-3IRvdgQIbXVy5N3dWVqTtBWI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"type\" : \"Final Test 4\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/categories/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"categories",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Pacth Category",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"type\" : \"Final Test 4\"\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/categories/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"categories",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 07 Dec 2022 15:06:14 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "144"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": 200,\n    \"message\": \"ok\",\n    \"data\": {\n        \"id\": 1,\n        \"type\": \"Final Test 4\",\n        \"sold_product_amount\": 0,\n        \"updated_at\": \"2022-12-07T22:06:14.574829+07:00\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjo0LCJyb2xlX3VzZXIiOiJhZG1pbiJ9.XV2q-gTMO_nAGyylP4-3IRvdgQIbXVy5N3dWVqTtBWI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/categories/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"categories",
+								"2"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete Category",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/categories/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"categories",
+										"2"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 07 Dec 2022 15:06:41 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "94"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": 200,\n    \"message\": \"ok\",\n    \"data\": {\n        \"message\": \"Category has been successfully deleted\"\n    }\n}"
+						}
+					]
+				}
+			]
+		}
+	]
+}
