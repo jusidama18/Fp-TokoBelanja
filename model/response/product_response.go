@@ -24,3 +24,7 @@ type ProductPutResponseBody struct {
 type ProductPutResponse struct {
 	Product ProductPutResponseBody
 }
+
+type ProductDeleteResponse struct {
+	Message string `json:"message"`
+}

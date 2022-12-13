@@ -180,3 +180,50 @@ func (pc *productController) Put(c *gin.Context) {
 		),
 	)
 }
+
+func (pc *productController) Delete(c *gin.Context) {
+	var uri input.ProductID
+
+	role := c.MustGet("roleUser").(string)
+
+	err := c.ShouldBindUri(&uri)
+	if err != nil {
+		errors := helper.GetErrorData(err)
+		c.JSON(
+			http.StatusUnprocessableEntity,
+			helper.NewErrorResponse(
+				http.StatusUnprocessableEntity,
+				"failed",
+				errors,
+			),
+		)
+		return
+	}
+
+	err2 := pc.srv.Delete(role, uri.ID)
+	if err2 != nil {
+		errors := helper.GetErrorData(err)
+		c.JSON(
+			http.StatusUnprocessableEntity,
+			helper.NewErrorResponse(
+				http.StatusUnprocessableEntity,
+				"failed",
+				errors,
+			),
+		)
+		return
+	}
+
+	productResponse := response.ProductDeleteResponse{
+		Message: "Product has been successfully deleted",
+	}
+
+	c.JSON(
+		http.StatusOK,
+		helper.NewResponse(
+			http.StatusOK,
+			"ok",
+			productResponse,
+		),
+	)
+}
