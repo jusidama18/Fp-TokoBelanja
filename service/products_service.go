@@ -8,6 +8,13 @@ import (
 	"fmt"
 )
 
+type ProductService interface {
+	Create(role string, input *input.ProductCreateInput) (*entity.Product, error)
+	GetAll(role string) ([]entity.Product, error)
+	Put(role string, id int, input *input.ProductPutInput) (*entity.Product, error)
+	Delete(role string, id int) error
+}
+
 type productService struct {
 	repo repository.ProductsRepository
 }
@@ -16,7 +23,7 @@ func NewProductService(repo repository.ProductsRepository) *productService {
 	return &productService{repo: repo}
 }
 
-func (s *productService) Create(role string, input input.ProductInput) (*entity.Product, error) {
+func (s *productService) Create(role string, input *input.ProductCreateInput) (*entity.Product, error) {
 	if role != "admin" {
 		return nil, errors.New("you are not admin")
 	}
@@ -50,7 +57,7 @@ func (s *productService) GetAll(role string) ([]entity.Product, error) {
 	return s.repo.GetAll()
 }
 
-func (s *productService) Put(role string, id int, input input.ProductInput) (*entity.Product, error) {
+func (s *productService) Put(role string, id int, input *input.ProductPutInput) (*entity.Product, error) {
 	if role != "admin" {
 		return nil, errors.New("you are not admin")
 	}
