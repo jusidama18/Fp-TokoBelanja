@@ -9,7 +9,7 @@ import (
 )
 
 type ProductsRepository interface {
-	Save(product *entity.Product) (*entity.Product, error)
+	Create(product *entity.Product) (*entity.Product, error)
 	GetAll() ([]entity.Product, error)
 	FindById(id int) (*entity.Product, error)
 	Update(id int, product *entity.Product) (*entity.Product, error)
@@ -24,7 +24,7 @@ func NewProductRepository(db *gorm.DB) *productsRepository {
 	return &productsRepository{db}
 }
 
-func (r *productsRepository) Save(product *entity.Product) (*entity.Product, error) {
+func (r *productsRepository) Create(product *entity.Product) (*entity.Product, error) {
 	err := r.db.Create(&product).Error
 	if err != nil {
 		return nil, err
