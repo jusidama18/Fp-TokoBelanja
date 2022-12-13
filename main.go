@@ -44,7 +44,9 @@ func main() {
 	// Product
 	productGroup := router.Group("/products")
 	productGroup.POST("/", middleware.AuthMiddleware, productController.Post)
-	
+	productGroup.GET("/", middleware.AuthMiddleware, productController.Get)
+	productGroup.PUT("/:id", middleware.AuthMiddleware, productController.Put)
+	productGroup.DELETE("/:id", middleware.AuthMiddleware, productController.Delete)
 
 	port := os.Getenv("PORT")
 	if port == "" {
