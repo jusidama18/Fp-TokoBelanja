@@ -8,6 +8,14 @@ import (
 	"gorm.io/gorm"
 )
 
+type ProductsRepository interface {
+	Save(product *entity.Product) (*entity.Product, error)
+	GetAll() ([]entity.Product, error)
+	FindById(id int) (*entity.Product, error)
+	Update(id int, product *entity.Product) (*entity.Product, error)
+	Delete(id int) error
+}
+
 type productsRepository struct {
 	db *gorm.DB
 }
