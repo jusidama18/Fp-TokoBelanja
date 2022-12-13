@@ -2,7 +2,7 @@ package response
 
 import "time"
 
-type ProductCreateResponse struct {
+type ProductResponse struct {
 	ID         int       `json:"id"`
 	Title      string    `json:"title"`
 	Price      int       `json:"price"`

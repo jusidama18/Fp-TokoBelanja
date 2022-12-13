@@ -44,6 +44,7 @@ func main() {
 	// Product
 	productGroup := router.Group("/products")
 	productGroup.POST("/", middleware.AuthMiddleware, productController.Post)
+	
 
 	port := os.Getenv("PORT")
 	if port == "" {

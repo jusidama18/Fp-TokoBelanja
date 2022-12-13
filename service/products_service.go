@@ -10,7 +10,7 @@ import (
 
 type ProductService interface {
 	Create(role string, input *input.ProductCreateInput) (*entity.Product, error)
-	GetAll(role string) ([]entity.Product, error)
+	GetAll() ([]entity.Product, error)
 	Put(role string, id int, input *input.ProductPutInput) (*entity.Product, error)
 	Delete(role string, id int) error
 }
@@ -49,10 +49,11 @@ func (s *productService) Create(role string, input *input.ProductCreateInput) (*
 	return s.repo.Create(product)
 }
 
-func (s *productService) GetAll(role string) ([]entity.Product, error) {
-	if role != "admin" {
-		return nil, errors.New("you are not admin")
-	}
+func (s *productService) GetAll() ([]entity.Product, error) {
+	// role string
+	// if role != "admin" {
+	// 	return nil, errors.New("you are not admin")
+	// }
 
 	return s.repo.GetAll()
 }

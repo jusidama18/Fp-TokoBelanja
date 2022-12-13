@@ -52,7 +52,7 @@ func (pc *productController) Post(c *gin.Context) {
 		return
 	}
 
-	productRespone := response.ProductCreateResponse{
+	productRespone := response.ProductResponse{
 		ID:         productData.ID,
 		Title:      productData.Title,
 		Price:      productData.Price,
@@ -67,6 +67,44 @@ func (pc *productController) Post(c *gin.Context) {
 			http.StatusCreated,
 			"created",
 			productRespone,
+		),
+	)
+}
+
+func (pc *productController) Get(c *gin.Context) {
+	var products []response.ProductResponse
+
+	productData, err := pc.srv.GetAll()
+	if err != nil {
+		errors := helper.GetErrorData(err)
+		c.JSON(
+			http.StatusUnprocessableEntity,
+			helper.NewErrorResponse(
+				http.StatusUnprocessableEntity,
+				"failed",
+				errors,
+			),
+		)
+		return
+	}
+
+	for _, product := range productData {
+		tmpData := response.ProductResponse{
+			ID:         product.ID,
+			Title:      product.Title,
+			Price:      product.Price,
+			Stock:      product.Stock,
+			CategoryID: product.CategoryID,
+			CreatedAt:  product.CreatedAt,
+		}
+		products = append(products, tmpData)
+	}
+	c.JSON(
+		http.StatusOK,
+		helper.NewResponse(
+			http.StatusOK,
+			"ok",
+			products,
 		),
 	)
 }
