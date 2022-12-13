@@ -36,10 +36,11 @@ func main() {
 	router.POST("/users/admin", userController.RegisterAdmin)
 
 	// Categories
-	router.POST("/categories", middleware.AuthMiddleware, categoryController.CreateCategory)
-	router.GET("/categories", middleware.AuthMiddleware, categoryController.GetAllCategories)
-	router.PATCH("/categories/:id", middleware.AuthMiddleware, categoryController.PatchCategory)
-	router.DELETE("/categories/:id", middleware.AuthMiddleware, categoryController.DeleteCategory)
+	categoryGroup := router.Group("/categories")
+	categoryGroup.POST("/", middleware.AuthMiddleware, categoryController.CreateCategory)
+	categoryGroup.GET("/", middleware.AuthMiddleware, categoryController.GetAllCategories)
+	categoryGroup.PATCH("/:id", middleware.AuthMiddleware, categoryController.PatchCategory)
+	categoryGroup.DELETE("/:id", middleware.AuthMiddleware, categoryController.DeleteCategory)
 
 	// Product
 	productGroup := router.Group("/products")
