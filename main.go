@@ -28,6 +28,10 @@ func main() {
 	productService := service.NewProductService(productRepository)
 	productController := controller.NewProductController(productService)
 
+	transactionRepo := repository.NewTransactionRepository(db)
+	transactionService := service.NewTransactionService(transactionRepo, productRepository, userRepository)
+	transactionController := controller.NewTransactionController(transactionService)
+
 	// Users
 	router.POST("/users/register", userController.RegisterUser)
 	router.POST("/users/login", userController.LoginUser)
@@ -48,6 +52,11 @@ func main() {
 	productGroup.GET("/", middleware.AuthMiddleware, productController.Get)
 	productGroup.PUT("/:id", middleware.AuthMiddleware, productController.Put)
 	productGroup.DELETE("/:id", middleware.AuthMiddleware, productController.Delete)
+
+	transGroup := router.Group("/transactions")
+	transGroup.POST("/", middleware.AuthMiddleware, transactionController.CreateTransaction)
+	transGroup.GET("/my-transactions", middleware.AuthMiddleware, transactionController.FindMyTransactions)
+	transGroup.GET("/user-transactions", middleware.AuthMiddleware, transactionController.FindUserTransaction)
 
 	port := os.Getenv("PORT")
 	if port == "" {

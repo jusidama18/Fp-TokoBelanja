@@ -34,7 +34,7 @@ func StartDB() {
 	}
 
 	fmt.Println("success connect to database")
-	db.AutoMigrate(entity.User{}, entity.Category{})
+	db.AutoMigrate(entity.User{}, entity.Category{}, entity.Product{}, entity.Transaction{})
 	SetUpDBConnection(db)
 }
 

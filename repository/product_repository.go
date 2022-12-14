@@ -43,6 +43,7 @@ func (r *productsRepository) GetAll() ([]entity.Product, error) {
 
 func (r *productsRepository) FindById(id int) (*entity.Product, error) {
 	var product *entity.Product
+	fmt.Println(id)
 	err := r.db.First(&product, id).Error
 	if err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {

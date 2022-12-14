@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "27e4edf6-3840-48a7-b690-8dcc7038a351",
+		"_postman_id": "cac51586-81d8-4c0d-ba19-e91cd935e461",
 		"name": "Final Project 4",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "16432785"
+		"_exporter_id": "18315454"
 	},
 	"item": [
 		{
@@ -16,7 +16,12 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"full_name\" : \"Final Project 4\",\r\n    \"email\" : \"finalp4@gmail.com\",\r\n    \"password\" : \"final12345\"\r\n}"
+							"raw": "{\r\n    \"full_name\" : \"Final Project 4\",\r\n    \"email\" : \"finalp4@gmail.com\",\r\n    \"password\" : \"final12345\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
 						"url": {
 							"raw": "http://localhost:8080/users/register",
@@ -93,7 +98,12 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\" : \"admin@gmail.com\",\r\n    \"password\" : \"admin12345\"\r\n}"
+							"raw": "{\r\n    \"email\" : \"admin@gmail.com\",\r\n    \"password\" : \"admin12345\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
 						"url": {
 							"raw": "http://localhost:8080/users/login",
@@ -203,7 +213,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjozLCJyb2xlX3VzZXIiOiJjdXN0b21lciJ9.ndVtFkG-i3c6Qj8Xar1HXkIvJ1no6bI7fcVgoHru8j8",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoyLCJyb2xlX3VzZXIiOiJhZG1pbiJ9.ytW3MKtzs-ZxYLPbwc9kViWuNxbBPw9uOd_5OeOA5zQ",
 									"type": "string"
 								}
 							]
@@ -279,7 +289,12 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"full_name\" : \"Admin \",\r\n    \"email\" : \"admin@gmail.com\",\r\n    \"password\" : \"admin12345\"\r\n}"
+							"raw": "{\r\n    \"full_name\" : \"Admin \",\r\n    \"email\" : \"admin@gmail.com\",\r\n    \"password\" : \"admin12345\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
 						"url": {
 							"raw": "http://localhost:8080/users/admin",
@@ -352,7 +367,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjo0LCJyb2xlX3VzZXIiOiJhZG1pbiJ9.XV2q-gTMO_nAGyylP4-3IRvdgQIbXVy5N3dWVqTtBWI",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoyLCJyb2xlX3VzZXIiOiJhZG1pbiJ9.ytW3MKtzs-ZxYLPbwc9kViWuNxbBPw9uOd_5OeOA5zQ",
 									"type": "string"
 								}
 							]
@@ -361,7 +376,12 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"type\" : \"Belanja\"\r\n}"
+							"raw": "{\r\n    \"type\" : \"Belanja\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
 						"url": {
 							"raw": "http://localhost:8080/categories",
@@ -427,7 +447,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjo0LCJyb2xlX3VzZXIiOiJhZG1pbiJ9.XV2q-gTMO_nAGyylP4-3IRvdgQIbXVy5N3dWVqTtBWI",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoyLCJyb2xlX3VzZXIiOiJhZG1pbiJ9.ytW3MKtzs-ZxYLPbwc9kViWuNxbBPw9uOd_5OeOA5zQ",
 									"type": "string"
 								}
 							]
@@ -629,6 +649,525 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"status_code\": 200,\n    \"message\": \"ok\",\n    \"data\": {\n        \"message\": \"Category has been successfully deleted\"\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "Add Product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjo0LCJyb2xlX3VzZXIiOiJhZG1pbiJ9.XV2q-gTMO_nAGyylP4-3IRvdgQIbXVy5N3dWVqTtBWI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Mie Goreng\",\r\n    \"price\": 5000,\r\n    \"stock\": 50,\r\n    \"category_id\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Add Category",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"type\" : \"Belanja\"\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/categories",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"categories"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 07 Dec 2022 15:05:23 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "145"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": 201,\n    \"message\": \"created\",\n    \"data\": {\n        \"id\": 2,\n        \"type\": \"Belanja\",\n        \"sold_product_amount\": 0,\n        \"created_at\": \"2022-12-07T22:05:23.5943882+07:00\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjo0LCJyb2xlX3VzZXIiOiJhZG1pbiJ9.XV2q-gTMO_nAGyylP4-3IRvdgQIbXVy5N3dWVqTtBWI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Category",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/categories",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"categories"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 07 Dec 2022 15:05:40 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "514"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": 200,\n    \"message\": \"ok\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"type\": \"Final Test 3\",\n            \"sold_product_amount\": 0,\n            \"created_at\": \"2022-12-03T10:59:31.413599+07:00\",\n            \"updated_at\": \"2022-12-03T11:00:31.09485+07:00\",\n            \"Products\": [\n                {\n                    \"id\": 1,\n                    \"title\": \"Pakaian\",\n                    \"price\": 200000,\n                    \"stock\": 6,\n                    \"created_at\": \"2022-12-03T19:13:39.978545+07:00\",\n                    \"updated_at\": \"2022-12-03T19:14:11.605645+07:00\"\n                }\n            ]\n        },\n        {\n            \"id\": 2,\n            \"type\": \"Belanja\",\n            \"sold_product_amount\": 0,\n            \"created_at\": \"2022-12-07T22:05:23.594388+07:00\",\n            \"updated_at\": \"2022-12-07T22:05:23.594388+07:00\",\n            \"Products\": []\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Edit Product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjo0LCJyb2xlX3VzZXIiOiJhZG1pbiJ9.XV2q-gTMO_nAGyylP4-3IRvdgQIbXVy5N3dWVqTtBWI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Mie Rebus\",\r\n    \"price\": 5000,\r\n    \"stock\": 50,\r\n    \"category_id\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/products/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Pacth Category",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"type\" : \"Final Test 4\"\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/categories/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"categories",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 07 Dec 2022 15:06:14 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "144"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": 200,\n    \"message\": \"ok\",\n    \"data\": {\n        \"id\": 1,\n        \"type\": \"Final Test 4\",\n        \"sold_product_amount\": 0,\n        \"updated_at\": \"2022-12-07T22:06:14.574829+07:00\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjo0LCJyb2xlX3VzZXIiOiJhZG1pbiJ9.XV2q-gTMO_nAGyylP4-3IRvdgQIbXVy5N3dWVqTtBWI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/products/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"2"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete Category",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/categories/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"categories",
+										"2"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 07 Dec 2022 15:06:41 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "94"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": 200,\n    \"message\": \"ok\",\n    \"data\": {\n        \"message\": \"Category has been successfully deleted\"\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Transaction",
+			"item": [
+				{
+					"name": "Add Transactions",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjo0LCJyb2xlX3VzZXIiOiJhZG1pbiJ9.XV2q-gTMO_nAGyylP4-3IRvdgQIbXVy5N3dWVqTtBWI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"type\" : \"Belanja\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/transactions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"transactions"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Add Category",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"type\" : \"Belanja\"\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/categories",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"categories"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 07 Dec 2022 15:05:23 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "145"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": 201,\n    \"message\": \"created\",\n    \"data\": {\n        \"id\": 2,\n        \"type\": \"Belanja\",\n        \"sold_product_amount\": 0,\n        \"created_at\": \"2022-12-07T22:05:23.5943882+07:00\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get My Transactions",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoyLCJyb2xlX3VzZXIiOiJhZG1pbiJ9.ytW3MKtzs-ZxYLPbwc9kViWuNxbBPw9uOd_5OeOA5zQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/transactions/my-transactions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"transactions",
+								"my-transactions"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Category",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/categories",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"categories"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 07 Dec 2022 15:05:40 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "514"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": 200,\n    \"message\": \"ok\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"type\": \"Final Test 3\",\n            \"sold_product_amount\": 0,\n            \"created_at\": \"2022-12-03T10:59:31.413599+07:00\",\n            \"updated_at\": \"2022-12-03T11:00:31.09485+07:00\",\n            \"Products\": [\n                {\n                    \"id\": 1,\n                    \"title\": \"Pakaian\",\n                    \"price\": 200000,\n                    \"stock\": 6,\n                    \"created_at\": \"2022-12-03T19:13:39.978545+07:00\",\n                    \"updated_at\": \"2022-12-03T19:14:11.605645+07:00\"\n                }\n            ]\n        },\n        {\n            \"id\": 2,\n            \"type\": \"Belanja\",\n            \"sold_product_amount\": 0,\n            \"created_at\": \"2022-12-07T22:05:23.594388+07:00\",\n            \"updated_at\": \"2022-12-07T22:05:23.594388+07:00\",\n            \"Products\": []\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Users Transactions",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoyLCJyb2xlX3VzZXIiOiJhZG1pbiJ9.ytW3MKtzs-ZxYLPbwc9kViWuNxbBPw9uOd_5OeOA5zQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/transactions/user-transactions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"transactions",
+								"user-transactions"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Category",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/categories",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"categories"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 07 Dec 2022 15:05:40 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "514"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status_code\": 200,\n    \"message\": \"ok\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"type\": \"Final Test 3\",\n            \"sold_product_amount\": 0,\n            \"created_at\": \"2022-12-03T10:59:31.413599+07:00\",\n            \"updated_at\": \"2022-12-03T11:00:31.09485+07:00\",\n            \"Products\": [\n                {\n                    \"id\": 1,\n                    \"title\": \"Pakaian\",\n                    \"price\": 200000,\n                    \"stock\": 6,\n                    \"created_at\": \"2022-12-03T19:13:39.978545+07:00\",\n                    \"updated_at\": \"2022-12-03T19:14:11.605645+07:00\"\n                }\n            ]\n        },\n        {\n            \"id\": 2,\n            \"type\": \"Belanja\",\n            \"sold_product_amount\": 0,\n            \"created_at\": \"2022-12-07T22:05:23.594388+07:00\",\n            \"updated_at\": \"2022-12-07T22:05:23.594388+07:00\",\n            \"Products\": []\n        }\n    ]\n}"
 						}
 					]
 				}
