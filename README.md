@@ -30,7 +30,7 @@ Projek dideploy di Railway dengan link berikut [https://fp-tokobelanja-productio
 ### Locally
 - Clone this repo
 ```
-git clone https://github.com/DionFauzi/fp-Fp-TokoBelanja
+git clone https://github.com/DionFauzi/Fp-TokoBelanja
 ```
 - Run PostgreSQL Docker script
 ```
