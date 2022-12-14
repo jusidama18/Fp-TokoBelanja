@@ -24,7 +24,7 @@
 
 
 ## Deployment
-Projek dideploy di Railway dengan link berikut [https://fp-kanbanboard-production.up.railway.app/](https://fp-kanbanboard-production.up.railway.app/)
+Projek dideploy di Railway dengan link berikut [https://fp-tokobelanja-production-b9b7.up.railway.app/](https://fp-tokobelanja-production-b9b7.up.railway.app/)
 
 ## How to Run
 ### Locally
