@@ -30,7 +30,7 @@ func StartDB() {
 	config := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s TimeZone=Asia/Jakarta", dbHost, dbUser, dbPass, dbName, dbPort)
 	db, err := gorm.Open(postgres.Open(config), &gorm.Config{})
 	if err != nil {
-		log.Fatal("error connection to database", err)
+		log.Fatal("error connection to database ", err)
 	}
 
 	fmt.Println("success connect to database")
