@@ -18,6 +18,14 @@ func NewCategoryController(categoryService service.CategoryService) *categoryCon
 	return &categoryController{categoryService}
 }
 
+// @Summary Create Category
+// @Description Create Category by Data Provided
+// @Tags Categories
+// @Accept json
+// @Produce json
+// @Param data body input.CategoryCreateInput true "Create Category"
+// @Success 200 {object} helper.Response{data=response.CategoryCreateResponse}
+// @Router /categories [post]
 func (h *categoryController) CreateCategory(c *gin.Context) {
 	var input input.CategoryCreateInput
 
@@ -26,28 +34,14 @@ func (h *categoryController) CreateCategory(c *gin.Context) {
 	err := c.ShouldBindJSON(&input)
 	if err != nil {
 		errors := helper.GetErrorData(err)
-		c.JSON(
-			http.StatusUnprocessableEntity,
-			helper.NewErrorResponse(
-				http.StatusUnprocessableEntity,
-				"failed",
-				errors,
-			),
-		)
+		helper.Error(c, http.StatusUnprocessableEntity, "failed", errors)
 		return
 	}
 
 	categoryData, err := h.categoryService.CreateCategory(role_user, input)
 	if err != nil {
 		errors := helper.GetErrorData(err)
-		c.JSON(
-			http.StatusUnprocessableEntity,
-			helper.NewErrorResponse(
-				http.StatusUnprocessableEntity,
-				"failed",
-				errors,
-			),
-		)
+		helper.Error(c, http.StatusUnprocessableEntity, "failed", errors)
 		return
 	}
 
@@ -58,16 +52,16 @@ func (h *categoryController) CreateCategory(c *gin.Context) {
 		CreatedAt:         categoryData.CreatedAt,
 	}
 
-	c.JSON(
-		http.StatusCreated,
-		helper.NewResponse(
-			http.StatusCreated,
-			"created",
-			categoryResponse,
-		),
-	)
+	helper.Success(c, http.StatusCreated, "created", categoryResponse)
 }
 
+// @Summary Get All Category with Product
+// @Description Get All Category with Product
+// @Tags Categories
+// @Accept json
+// @Produce json
+// @Success 200 {object} helper.Response{data=[]response.CategoryGetResponse}
+// @Router /categories [get]
 func (h *categoryController) GetAllCategories(c *gin.Context) {
 	var (
 		allProducts   []response.CategoryProduct
@@ -79,14 +73,7 @@ func (h *categoryController) GetAllCategories(c *gin.Context) {
 	categoryData, err := h.categoryService.GetAllCategories(role_user)
 	if err != nil {
 		errors := helper.GetErrorData(err)
-		c.JSON(
-			http.StatusUnprocessableEntity,
-			helper.NewErrorResponse(
-				http.StatusUnprocessableEntity,
-				"failed",
-				errors,
-			),
-		)
+		helper.Error(c, http.StatusUnprocessableEntity, "failed", errors)
 		return
 	}
 
@@ -94,14 +81,7 @@ func (h *categoryController) GetAllCategories(c *gin.Context) {
 		productsData, err := h.categoryService.GetProductsByCategoryID(dataCategory.ID)
 		if err != nil {
 			errors := helper.GetErrorData(err)
-			c.JSON(
-				http.StatusUnprocessableEntity,
-				helper.NewErrorResponse(
-					http.StatusUnprocessableEntity,
-					"failed",
-					errors,
-				),
-			)
+			helper.Error(c, http.StatusUnprocessableEntity, "failed", errors)
 			return
 		}
 		for _, dataProduct := range productsData {
@@ -128,16 +108,18 @@ func (h *categoryController) GetAllCategories(c *gin.Context) {
 		allProducts = []response.CategoryProduct{}
 	}
 
-	c.JSON(
-		http.StatusOK,
-		helper.NewResponse(
-			http.StatusOK,
-			"ok",
-			allCategories,
-		),
-	)
+	helper.Success(c, http.StatusOK, "ok", allCategories)
 }
 
+// @Summary Patch Category
+// @Description Patch Category by Data Provided
+// @Tags Categories
+// @Accept json
+// @Produce json
+// @Param data body input.CategoryPatchInput true "Patch Task Category"
+// @Param id path int true "Category ID"
+// @Success 200 {object} helper.Response{data=response.CategoryPatchResponse}
+// @Router /categories/{id} [patch]
 func (h *categoryController) PatchCategory(c *gin.Context) {
 	var (
 		inputBody input.CategoryPatchInput
@@ -149,42 +131,21 @@ func (h *categoryController) PatchCategory(c *gin.Context) {
 	err := c.ShouldBindJSON(&inputBody)
 	if err != nil {
 		errors := helper.GetErrorData(err)
-		c.JSON(
-			http.StatusUnprocessableEntity,
-			helper.NewErrorResponse(
-				http.StatusUnprocessableEntity,
-				"failed",
-				errors,
-			),
-		)
+		helper.Error(c, http.StatusUnprocessableEntity, "failed", errors)
 		return
 	}
 
 	err = c.ShouldBindUri(&uri)
 	if err != nil {
 		errors := helper.GetErrorData(err)
-		c.JSON(
-			http.StatusUnprocessableEntity,
-			helper.NewErrorResponse(
-				http.StatusUnprocessableEntity,
-				"failed",
-				errors,
-			),
-		)
+		helper.Error(c, http.StatusUnprocessableEntity, "failed", errors)
 		return
 	}
 
 	categoryData, err := h.categoryService.PatchCategory(role_user, uri.ID, inputBody)
 	if err != nil {
 		errors := helper.GetErrorData(err)
-		c.JSON(
-			http.StatusUnprocessableEntity,
-			helper.NewErrorResponse(
-				http.StatusUnprocessableEntity,
-				"failed",
-				errors,
-			),
-		)
+		helper.Error(c, http.StatusUnprocessableEntity, "failed", errors)
 		return
 	}
 
@@ -195,16 +156,17 @@ func (h *categoryController) PatchCategory(c *gin.Context) {
 		UpdatedAt:         categoryData.UpdatedAt,
 	}
 
-	c.JSON(
-		http.StatusOK,
-		helper.NewResponse(
-			http.StatusOK,
-			"ok",
-			categoryResponse,
-		),
-	)
+	helper.Success(c, http.StatusOK, "ok", categoryResponse)
 }
 
+// @Summary Delete Category
+// @Description Delete Category by Data Provided
+// @Tags Categories
+// @Accept json
+// @Produce json
+// @Param id path int true "Delete Category"
+// @Success 200 {object} helper.Response{data=string}
+// @Router /categories/{id} [delete]
 func (h *categoryController) DeleteCategory(c *gin.Context) {
 	var uri input.CategoryIdUri
 
@@ -213,28 +175,14 @@ func (h *categoryController) DeleteCategory(c *gin.Context) {
 	err := c.ShouldBindUri(&uri)
 	if err != nil {
 		errors := helper.GetErrorData(err)
-		c.JSON(
-			http.StatusUnprocessableEntity,
-			helper.NewErrorResponse(
-				http.StatusUnprocessableEntity,
-				"failed",
-				errors,
-			),
-		)
+		helper.Error(c, http.StatusUnprocessableEntity, "failed", errors)
 		return
 	}
 
 	err = h.categoryService.DeleteCategory(role_user, uri.ID)
 	if err != nil {
 		errors := helper.GetErrorData(err)
-		c.JSON(
-			http.StatusUnprocessableEntity,
-			helper.NewErrorResponse(
-				http.StatusUnprocessableEntity,
-				"failed",
-				errors,
-			),
-		)
+		helper.Error(c, http.StatusUnprocessableEntity, "failed", errors)
 		return
 	}
 
@@ -242,12 +190,5 @@ func (h *categoryController) DeleteCategory(c *gin.Context) {
 		Message: "Category has been successfully deleted",
 	}
 
-	c.JSON(
-		http.StatusOK,
-		helper.NewResponse(
-			http.StatusOK,
-			"ok",
-			categoryResponse,
-		),
-	)
+	helper.Success(c, http.StatusOK, "ok", categoryResponse)
 }

@@ -8,6 +8,20 @@ definitions:
       status_code:
         type: integer
     type: object
+  input.CategoryCreateInput:
+    properties:
+      type:
+        type: string
+    required:
+    - type
+    type: object
+  input.CategoryPatchInput:
+    properties:
+      type:
+        type: string
+    required:
+    - type
+    type: object
   input.CreateTransactionRequest:
     properties:
       product_id:
@@ -50,6 +64,60 @@ definitions:
     - email
     - full_name
     - password
+    type: object
+  response.CategoryCreateResponse:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: integer
+      sold_product_amount:
+        type: integer
+      type:
+        type: string
+    type: object
+  response.CategoryGetResponse:
+    properties:
+      Products:
+        items:
+          $ref: '#/definitions/response.CategoryProduct'
+        type: array
+      created_at:
+        type: string
+      id:
+        type: integer
+      sold_product_amount:
+        type: integer
+      type:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  response.CategoryPatchResponse:
+    properties:
+      id:
+        type: integer
+      sold_product_amount:
+        type: integer
+      type:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  response.CategoryProduct:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: integer
+      price:
+        type: integer
+      stock:
+        type: integer
+      title:
+        type: string
+      updated_at:
+        type: string
     type: object
   response.MyTransactionResponse:
     properties:
@@ -162,6 +230,111 @@ info:
   title: TokoBelanja-API
   version: "1.0"
 paths:
+  /categories:
+    get:
+      consumes:
+      - application/json
+      description: Get All Category with Product
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/helper.Response'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/response.CategoryGetResponse'
+                  type: array
+              type: object
+      summary: Get All Category with Product
+      tags:
+      - Categories
+    post:
+      consumes:
+      - application/json
+      description: Create Category by Data Provided
+      parameters:
+      - description: Create Category
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/input.CategoryCreateInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/helper.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/response.CategoryCreateResponse'
+              type: object
+      summary: Create Category
+      tags:
+      - Categories
+  /categories/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete Category by Data Provided
+      parameters:
+      - description: Delete Category
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/helper.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: Delete Category
+      tags:
+      - Categories
+    patch:
+      consumes:
+      - application/json
+      description: Patch Category by Data Provided
+      parameters:
+      - description: Patch Task Category
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/input.CategoryPatchInput'
+      - description: Category ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/helper.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/response.CategoryPatchResponse'
+              type: object
+      summary: Patch Category
+      tags:
+      - Categories
   /transactions:
     post:
       consumes:
