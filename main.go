@@ -9,8 +9,22 @@ import (
 	"os"
 
 	"github.com/gin-gonic/gin"
+
+	_ "TokoBelanja/docs"
+	swaggerfiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
+// @title TokoBelanja-API
+// @version 1.0
+// @description This is a API webservice to manage TokoBelanja API
+// @termsOfService http://swagger.io/terms/
+// @contact.name API Support
+// @contact.email hacktiv@swagger.io
+// @license.name Apache 2.0
+// @license.url http://www.apache.org/licenses/LICENSE-2.0.html
+// @host localhost:8080
+// @BasePath /
 func main() {
 	router := gin.Default()
 	config.StartDB()
@@ -57,6 +71,9 @@ func main() {
 	transGroup.POST("/", middleware.AuthMiddleware, transactionController.CreateTransaction)
 	transGroup.GET("/my-transactions", middleware.AuthMiddleware, transactionController.FindMyTransactions)
 	transGroup.GET("/user-transactions", middleware.AuthMiddleware, transactionController.FindUserTransaction)
+
+	docs := router.Group("/docs")
+	docs.GET("/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 
 	port := os.Getenv("PORT")
 	if port == "" {
