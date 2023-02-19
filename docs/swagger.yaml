@@ -32,6 +32,36 @@ definitions:
     - product_id
     - quantity
     type: object
+  input.ProductCreateInput:
+    properties:
+      category_Id:
+        type: integer
+      price:
+        type: integer
+      stock:
+        type: integer
+      title:
+        type: string
+    required:
+    - price
+    - stock
+    - title
+    type: object
+  input.ProductPutInput:
+    properties:
+      category_Id:
+        type: integer
+      price:
+        type: integer
+      stock:
+        type: integer
+      title:
+        type: string
+    required:
+    - price
+    - stock
+    - title
+    type: object
   input.UserLoginInput:
     properties:
       email:
@@ -133,6 +163,43 @@ definitions:
         type: integer
       user_id:
         type: integer
+    type: object
+  response.ProductPutResponse:
+    properties:
+      product:
+        $ref: '#/definitions/response.ProductPutResponseBody'
+    type: object
+  response.ProductPutResponseBody:
+    properties:
+      CategoryId:
+        type: integer
+      createdAt:
+        type: string
+      id:
+        type: integer
+      price:
+        type: integer
+      stock:
+        type: integer
+      title:
+        type: string
+      updatedAt:
+        type: string
+    type: object
+  response.ProductResponse:
+    properties:
+      category_Id:
+        type: integer
+      created_at:
+        type: string
+      id:
+        type: integer
+      price:
+        type: integer
+      stock:
+        type: integer
+      title:
+        type: string
     type: object
   response.TransactionBillResponse:
     properties:
@@ -309,7 +376,7 @@ paths:
       - application/json
       description: Patch Category by Data Provided
       parameters:
-      - description: Patch Task Category
+      - description: Patch Category
         in: body
         name: data
         required: true
@@ -335,6 +402,111 @@ paths:
       summary: Patch Category
       tags:
       - Categories
+  /products:
+    get:
+      consumes:
+      - application/json
+      description: Get All Product
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/helper.Response'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/response.ProductResponse'
+                  type: array
+              type: object
+      summary: Get All Product
+      tags:
+      - Products
+    post:
+      consumes:
+      - application/json
+      description: Create Product by Data Provided
+      parameters:
+      - description: Create Product
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/input.ProductCreateInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/helper.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/response.ProductResponse'
+              type: object
+      summary: Create Product
+      tags:
+      - Products
+  /products/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete Product by Data Provided
+      parameters:
+      - description: Delete Product
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/helper.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: Delete Product
+      tags:
+      - Products
+    put:
+      consumes:
+      - application/json
+      description: Put Product by Data Provided
+      parameters:
+      - description: Put Product
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/input.ProductPutInput'
+      - description: Product ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/helper.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/response.ProductPutResponse'
+              type: object
+      summary: Put Product
+      tags:
+      - Products
   /transactions:
     post:
       consumes:

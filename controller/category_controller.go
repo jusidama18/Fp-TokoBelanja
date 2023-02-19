@@ -116,7 +116,7 @@ func (h *categoryController) GetAllCategories(c *gin.Context) {
 // @Tags Categories
 // @Accept json
 // @Produce json
-// @Param data body input.CategoryPatchInput true "Patch Task Category"
+// @Param data body input.CategoryPatchInput true "Patch Category"
 // @Param id path int true "Category ID"
 // @Success 200 {object} helper.Response{data=response.CategoryPatchResponse}
 // @Router /categories/{id} [patch]

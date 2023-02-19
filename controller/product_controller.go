@@ -19,6 +19,14 @@ func NewProductController(srv service.ProductService) *productController {
 	return &productController{srv: srv}
 }
 
+// @Summary Create Product
+// @Description Create Product by Data Provided
+// @Tags Products
+// @Accept json
+// @Produce json
+// @Param data body input.ProductCreateInput true "Create Product"
+// @Success 200 {object} helper.Response{data=response.ProductResponse}
+// @Router /products [post]
 func (pc *productController) Post(c *gin.Context) {
 	var input *input.ProductCreateInput
 
@@ -27,28 +35,14 @@ func (pc *productController) Post(c *gin.Context) {
 	err := c.ShouldBindJSON(&input)
 	if err != nil {
 		errors := helper.GetErrorData(err)
-		c.JSON(
-			http.StatusUnprocessableEntity,
-			helper.NewErrorResponse(
-				http.StatusUnprocessableEntity,
-				"failed",
-				errors,
-			),
-		)
+		helper.Error(c, http.StatusUnprocessableEntity, "failed", errors)
 		return
 	}
 
 	productData, err2 := pc.srv.Create(role, input)
 	if err2 != nil {
 		errors := helper.GetErrorData(err)
-		c.JSON(
-			http.StatusUnprocessableEntity,
-			helper.NewErrorResponse(
-				http.StatusUnprocessableEntity,
-				"failed",
-				errors,
-			),
-		)
+		helper.Error(c, http.StatusUnprocessableEntity, "failed", errors)
 		return
 	}
 
@@ -60,31 +54,23 @@ func (pc *productController) Post(c *gin.Context) {
 		CategoryID: productData.CategoryID,
 		CreatedAt:  productData.CreatedAt,
 	}
-
-	c.JSON(
-		http.StatusCreated,
-		helper.NewResponse(
-			http.StatusCreated,
-			"created",
-			productRespone,
-		),
-	)
+	helper.Success(c, http.StatusCreated, "created", productRespone)
 }
 
+// @Summary Get All Product
+// @Description Get All Product
+// @Tags Products
+// @Accept json
+// @Produce json
+// @Success 200 {object} helper.Response{data=[]response.ProductResponse}
+// @Router /products [get]
 func (pc *productController) Get(c *gin.Context) {
 	var products []response.ProductResponse
 
 	productData, err := pc.srv.GetAll()
 	if err != nil {
 		errors := helper.GetErrorData(err)
-		c.JSON(
-			http.StatusUnprocessableEntity,
-			helper.NewErrorResponse(
-				http.StatusUnprocessableEntity,
-				"failed",
-				errors,
-			),
-		)
+		helper.Error(c, http.StatusUnprocessableEntity, "failed", errors)
 		return
 	}
 
@@ -99,16 +85,18 @@ func (pc *productController) Get(c *gin.Context) {
 		}
 		products = append(products, tmpData)
 	}
-	c.JSON(
-		http.StatusOK,
-		helper.NewResponse(
-			http.StatusOK,
-			"ok",
-			products,
-		),
-	)
+	helper.Success(c, http.StatusOK, "ok", products)
 }
 
+// @Summary Put Product
+// @Description Put Product by Data Provided
+// @Tags Products
+// @Accept json
+// @Produce json
+// @Param data body input.ProductPutInput true "Put Product"
+// @Param id path int true "Product ID"
+// @Success 200 {object} helper.Response{data=response.ProductPutResponse}
+// @Router /products/{id} [put]
 func (pc *productController) Put(c *gin.Context) {
 	var (
 		uri       input.ProductID
@@ -120,42 +108,21 @@ func (pc *productController) Put(c *gin.Context) {
 	err := c.ShouldBindJSON(&inputBody)
 	if err != nil {
 		errors := helper.GetErrorData(err)
-		c.JSON(
-			http.StatusUnprocessableEntity,
-			helper.NewErrorResponse(
-				http.StatusUnprocessableEntity,
-				"failed",
-				errors,
-			),
-		)
+		helper.Error(c, http.StatusUnprocessableEntity, "failed", errors)
 		return
 	}
 
 	err = c.ShouldBindUri(&uri)
 	if err != nil {
 		errors := helper.GetErrorData(err)
-		c.JSON(
-			http.StatusUnprocessableEntity,
-			helper.NewErrorResponse(
-				http.StatusUnprocessableEntity,
-				"failed",
-				errors,
-			),
-		)
+		helper.Error(c, http.StatusUnprocessableEntity, "failed", errors)
 		return
 	}
 
 	productData, err := pc.srv.Put(role, uri.ID, inputBody)
 	if err != nil {
 		errors := helper.GetErrorData(err)
-		c.JSON(
-			http.StatusUnprocessableEntity,
-			helper.NewErrorResponse(
-				http.StatusUnprocessableEntity,
-				"failed",
-				errors,
-			),
-		)
+		helper.Error(c, http.StatusUnprocessableEntity, "failed", errors)
 		return
 	}
 
@@ -171,16 +138,17 @@ func (pc *productController) Put(c *gin.Context) {
 		},
 	}
 
-	c.JSON(
-		http.StatusOK,
-		helper.NewResponse(
-			http.StatusOK,
-			"ok",
-			productResponse,
-		),
-	)
+	helper.Success(c, http.StatusOK, "ok", productResponse)
 }
 
+// @Summary Delete Product
+// @Description Delete Product by Data Provided
+// @Tags Products
+// @Accept json
+// @Produce json
+// @Param id path int true "Delete Product"
+// @Success 200 {object} helper.Response{data=string}
+// @Router /products/{id} [delete]
 func (pc *productController) Delete(c *gin.Context) {
 	var uri input.ProductID
 
@@ -189,28 +157,14 @@ func (pc *productController) Delete(c *gin.Context) {
 	err := c.ShouldBindUri(&uri)
 	if err != nil {
 		errors := helper.GetErrorData(err)
-		c.JSON(
-			http.StatusUnprocessableEntity,
-			helper.NewErrorResponse(
-				http.StatusUnprocessableEntity,
-				"failed",
-				errors,
-			),
-		)
+		helper.Error(c, http.StatusUnprocessableEntity, "failed", errors)
 		return
 	}
 
 	err2 := pc.srv.Delete(role, uri.ID)
 	if err2 != nil {
 		errors := helper.GetErrorData(err)
-		c.JSON(
-			http.StatusUnprocessableEntity,
-			helper.NewErrorResponse(
-				http.StatusUnprocessableEntity,
-				"failed",
-				errors,
-			),
-		)
+		helper.Error(c, http.StatusUnprocessableEntity, "failed", errors)
 		return
 	}
 
@@ -218,12 +172,5 @@ func (pc *productController) Delete(c *gin.Context) {
 		Message: "Product has been successfully deleted",
 	}
 
-	c.JSON(
-		http.StatusOK,
-		helper.NewResponse(
-			http.StatusOK,
-			"ok",
-			productResponse,
-		),
-	)
+	helper.Success(c, http.StatusOK, "ok", productResponse)
 }
