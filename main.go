@@ -6,11 +6,13 @@ import (
 	"TokoBelanja/middleware"
 	"TokoBelanja/repository"
 	"TokoBelanja/service"
+	"fmt"
 	"os"
 
 	"github.com/gin-gonic/gin"
 
-	_ "TokoBelanja/docs"
+	docs "TokoBelanja/docs"
+
 	swaggerfiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
@@ -23,7 +25,6 @@ import (
 // @contact.email hacktiv@swagger.io
 // @license.name Apache 2.0
 // @license.url http://www.apache.org/licenses/LICENSE-2.0.html
-// @host localhost:8080
 // @BasePath /
 func main() {
 	router := gin.Default()
@@ -72,12 +73,17 @@ func main() {
 	transGroup.GET("/my-transactions", middleware.AuthMiddleware, transactionController.FindMyTransactions)
 	transGroup.GET("/user-transactions", middleware.AuthMiddleware, transactionController.FindUserTransaction)
 
-	docs := router.Group("/docs")
-	docs.GET("/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
+	router.GET("/docs/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 
+	base_url := os.Getenv("BASE_URL")
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "8080"
+	}
+	if base_url != "" {
+		docs.SwaggerInfo.Host = base_url
+	} else {
+		docs.SwaggerInfo.Host = fmt.Sprintf("localhost:%s", port)
 	}
 	router.Run(":" + port)
 }
