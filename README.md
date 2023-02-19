@@ -17,6 +17,7 @@
 | Endpoint   | POST /products       | Juan Simon Damanik |
 | Endpoint   | PUT /products/:id    | Juan Simon Damanik |
 | Endpoint   | DELETE /products/:id | Juan Simon Damanik |
+| Swagger	 | Add Swagger Docs	 | Juan Simon Damanik
 | Endpoint   | POST /transactions/        | Muhammad Rifqi Al Furqon |
 | Endpoint   | GET /transactions/my-transactions       | Muhammad Rifqi Al Furqon |
 | Endpoint   | GET /transactions/user-transactions    | Muhammad Rifqi Al Furqon|
