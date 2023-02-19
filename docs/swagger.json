@@ -17,6 +17,128 @@
     "host": "localhost:8080",
     "basePath": "/",
     "paths": {
+        "/transactions": {
+            "post": {
+                "description": "Create Transaction by Data Provided",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Transactions"
+                ],
+                "summary": "Create Transaction",
+                "parameters": [
+                    {
+                        "description": "Create Transaction",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/input.CreateTransactionRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/helper.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/response.TransactionBillResponse"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/transactions/my-transactions": {
+            "get": {
+                "description": "Get My Transaction",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Transactions"
+                ],
+                "summary": "Get My Transaction",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/helper.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/response.MyTransactionResponse"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/transactions/user-transactions": {
+            "get": {
+                "description": "Get All User Transaction",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Transactions"
+                ],
+                "summary": "Get All User Transaction",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/helper.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/response.UserTransactionResponse"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
         "/users/admin": {
             "post": {
                 "description": "Register New Admin by Data Provided",
@@ -215,6 +337,21 @@
                 }
             }
         },
+        "input.CreateTransactionRequest": {
+            "type": "object",
+            "required": [
+                "product_id",
+                "quantity"
+            ],
+            "properties": {
+                "product_id": {
+                    "type": "integer"
+                },
+                "quantity": {
+                    "type": "integer"
+                }
+            }
+        },
         "input.UserLoginInput": {
             "type": "object",
             "required": [
@@ -263,6 +400,92 @@
                 }
             }
         },
+        "response.MyTransactionResponse": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "product": {
+                    "$ref": "#/definitions/response.TransactionProduct"
+                },
+                "product_id": {
+                    "type": "integer"
+                },
+                "quantity": {
+                    "type": "integer"
+                },
+                "total_price": {
+                    "type": "integer"
+                },
+                "user_id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "response.TransactionBillResponse": {
+            "type": "object",
+            "properties": {
+                "product_title": {
+                    "type": "string"
+                },
+                "quantity": {
+                    "type": "integer"
+                },
+                "total_price": {
+                    "type": "integer"
+                }
+            }
+        },
+        "response.TransactionProduct": {
+            "type": "object",
+            "properties": {
+                "category_id": {
+                    "type": "integer"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "price": {
+                    "type": "integer"
+                },
+                "stock": {
+                    "type": "integer"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                }
+            }
+        },
+        "response.TransactionUser": {
+            "type": "object",
+            "properties": {
+                "balance": {
+                    "type": "integer"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "full_name": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "updated_at": {
+                    "type": "string"
+                }
+            }
+        },
         "response.UserLoginResponse": {
             "type": "object",
             "properties": {
@@ -299,6 +522,32 @@
                 },
                 "password": {
                     "type": "string"
+                }
+            }
+        },
+        "response.UserTransactionResponse": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "product": {
+                    "$ref": "#/definitions/response.TransactionProduct"
+                },
+                "product_id": {
+                    "type": "integer"
+                },
+                "quantity": {
+                    "type": "integer"
+                },
+                "total_price": {
+                    "type": "integer"
+                },
+                "user": {
+                    "$ref": "#/definitions/response.TransactionUser"
+                },
+                "user_id": {
+                    "type": "integer"
                 }
             }
         }

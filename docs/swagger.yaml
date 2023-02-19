@@ -8,6 +8,16 @@ definitions:
       status_code:
         type: integer
     type: object
+  input.CreateTransactionRequest:
+    properties:
+      product_id:
+        type: integer
+      quantity:
+        type: integer
+    required:
+    - product_id
+    - quantity
+    type: object
   input.UserLoginInput:
     properties:
       email:
@@ -41,6 +51,62 @@ definitions:
     - full_name
     - password
     type: object
+  response.MyTransactionResponse:
+    properties:
+      id:
+        type: integer
+      product:
+        $ref: '#/definitions/response.TransactionProduct'
+      product_id:
+        type: integer
+      quantity:
+        type: integer
+      total_price:
+        type: integer
+      user_id:
+        type: integer
+    type: object
+  response.TransactionBillResponse:
+    properties:
+      product_title:
+        type: string
+      quantity:
+        type: integer
+      total_price:
+        type: integer
+    type: object
+  response.TransactionProduct:
+    properties:
+      category_id:
+        type: integer
+      created_at:
+        type: string
+      id:
+        type: integer
+      price:
+        type: integer
+      stock:
+        type: integer
+      title:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  response.TransactionUser:
+    properties:
+      balance:
+        type: integer
+      created_at:
+        type: string
+      email:
+        type: string
+      full_name:
+        type: string
+      id:
+        type: integer
+      updated_at:
+        type: string
+    type: object
   response.UserLoginResponse:
     properties:
       token:
@@ -66,6 +132,23 @@ definitions:
       password:
         type: string
     type: object
+  response.UserTransactionResponse:
+    properties:
+      id:
+        type: integer
+      product:
+        $ref: '#/definitions/response.TransactionProduct'
+      product_id:
+        type: integer
+      quantity:
+        type: integer
+      total_price:
+        type: integer
+      user:
+        $ref: '#/definitions/response.TransactionUser'
+      user_id:
+        type: integer
+    type: object
 host: localhost:8080
 info:
   contact:
@@ -79,6 +162,77 @@ info:
   title: TokoBelanja-API
   version: "1.0"
 paths:
+  /transactions:
+    post:
+      consumes:
+      - application/json
+      description: Create Transaction by Data Provided
+      parameters:
+      - description: Create Transaction
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/input.CreateTransactionRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/helper.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/response.TransactionBillResponse'
+              type: object
+      summary: Create Transaction
+      tags:
+      - Transactions
+  /transactions/my-transactions:
+    get:
+      consumes:
+      - application/json
+      description: Get My Transaction
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/helper.Response'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/response.MyTransactionResponse'
+                  type: array
+              type: object
+      summary: Get My Transaction
+      tags:
+      - Transactions
+  /transactions/user-transactions:
+    get:
+      consumes:
+      - application/json
+      description: Get All User Transaction
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/helper.Response'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/response.UserTransactionResponse'
+                  type: array
+              type: object
+      summary: Get All User Transaction
+      tags:
+      - Transactions
   /users/admin:
     post:
       consumes:
