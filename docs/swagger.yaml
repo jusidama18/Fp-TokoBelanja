@@ -1,4 +1,71 @@
 basePath: /
+definitions:
+  helper.Response:
+    properties:
+      data: {}
+      message:
+        type: string
+      status_code:
+        type: integer
+    type: object
+  input.UserLoginInput:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    required:
+    - email
+    - password
+    type: object
+  input.UserPatchTopUpInput:
+    properties:
+      balance:
+        maximum: 100000000
+        minimum: 0
+        type: integer
+    required:
+    - balance
+    type: object
+  input.UserRegisterInput:
+    properties:
+      email:
+        type: string
+      full_name:
+        type: string
+      password:
+        minLength: 6
+        type: string
+    required:
+    - email
+    - full_name
+    - password
+    type: object
+  response.UserLoginResponse:
+    properties:
+      token:
+        type: string
+    type: object
+  response.UserPatchTopUpResponse:
+    properties:
+      message:
+        type: string
+    type: object
+  response.UserRegisterResponse:
+    properties:
+      balance:
+        type: integer
+      created_at:
+        type: string
+      email:
+        type: string
+      full_name:
+        type: string
+      id:
+        type: integer
+      password:
+        type: string
+    type: object
 host: localhost:8080
 info:
   contact:
@@ -11,5 +78,113 @@ info:
   termsOfService: http://swagger.io/terms/
   title: TokoBelanja-API
   version: "1.0"
-paths: {}
+paths:
+  /users/admin:
+    post:
+      consumes:
+      - application/json
+      description: Register New Admin by Data Provided
+      parameters:
+      - description: Register Admin
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/input.UserRegisterInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/helper.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/response.UserRegisterResponse'
+              type: object
+      summary: Register New Admin
+      tags:
+      - Users
+  /users/login:
+    post:
+      consumes:
+      - application/json
+      description: Login Account by Data Provided
+      parameters:
+      - description: Login Account
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/input.UserLoginInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/helper.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/response.UserLoginResponse'
+              type: object
+      summary: Login Account
+      tags:
+      - Users
+  /users/register:
+    post:
+      consumes:
+      - application/json
+      description: Register New User by Data Provided
+      parameters:
+      - description: Register User
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/input.UserRegisterInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/helper.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/response.UserRegisterResponse'
+              type: object
+      summary: Register New User
+      tags:
+      - Users
+  /users/topup:
+    patch:
+      consumes:
+      - application/json
+      description: Patch User's Topup by Data Provided
+      parameters:
+      - description: Patch User's Topup
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/input.UserPatchTopUpInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/helper.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/response.UserPatchTopUpResponse'
+              type: object
+      summary: Patch User's Topup
+      tags:
+      - Users
 swagger: "2.0"

@@ -19,34 +19,28 @@ func NewUserController(userService service.UserService) *userController {
 	return &userController{userService}
 }
 
+// @Summary Register New User
+// @Description Register New User by Data Provided
+// @Tags Users
+// @Accept json
+// @Produce json
+// @Param data body input.UserRegisterInput true "Register User"
+// @Success 200 {object} helper.Response{data=response.UserRegisterResponse}
+// @Router /users/register [post]
 func (h *userController) RegisterUser(c *gin.Context) {
 	var input input.UserRegisterInput
 
 	err := c.ShouldBindJSON(&input)
 	if err != nil {
 		errors := helper.GetErrorData(err)
-		c.JSON(
-			http.StatusUnprocessableEntity,
-			helper.NewErrorResponse(
-				http.StatusUnprocessableEntity,
-				"failed",
-				errors,
-			),
-		)
+		helper.Error(c, http.StatusUnprocessableEntity, "failed", errors)
 		return
 	}
 
 	userData, err := h.userService.RegisterUser(input)
 	if err != nil {
 		errors := helper.GetErrorData(err)
-		c.JSON(
-			http.StatusUnprocessableEntity,
-			helper.NewErrorResponse(
-				http.StatusUnprocessableEntity,
-				"failed",
-				errors,
-			),
-		)
+		helper.Error(c, http.StatusUnprocessableEntity, "failed", errors)
 		return
 	}
 
@@ -59,44 +53,31 @@ func (h *userController) RegisterUser(c *gin.Context) {
 		CreatedAt: userData.CreatedAt,
 	}
 
-	c.JSON(
-		http.StatusCreated,
-		helper.NewResponse(
-			http.StatusCreated,
-			"created",
-			userResponse,
-		),
-	)
+	helper.Success(c, http.StatusCreated, "created", userResponse)
 }
 
+// @Summary Login Account
+// @Description Login Account by Data Provided
+// @Tags Users
+// @Accept json
+// @Produce json
+// @Param data body input.UserLoginInput true "Login Account"
+// @Success 200 {object} helper.Response{data=response.UserLoginResponse}
+// @Router /users/login [post]
 func (h *userController) LoginUser(c *gin.Context) {
 	var input input.UserLoginInput
 
 	err := c.ShouldBindJSON(&input)
 	if err != nil {
 		errors := helper.GetErrorData(err)
-		c.JSON(
-			http.StatusUnprocessableEntity,
-			helper.NewErrorResponse(
-				http.StatusUnprocessableEntity,
-				"failed",
-				errors,
-			),
-		)
+		helper.Error(c, http.StatusUnprocessableEntity, "failed", errors)
 		return
 	}
 
 	token, err := h.userService.LoginUser(input)
 	if err != nil {
 		errors := helper.GetErrorData(err)
-		c.JSON(
-			http.StatusUnprocessableEntity,
-			helper.NewErrorResponse(
-				http.StatusUnprocessableEntity,
-				"failed",
-				errors,
-			),
-		)
+		helper.Error(c, http.StatusUnprocessableEntity, "failed", errors)
 		return
 	}
 
@@ -104,16 +85,17 @@ func (h *userController) LoginUser(c *gin.Context) {
 		Token: token,
 	}
 
-	c.JSON(
-		http.StatusOK,
-		helper.NewResponse(
-			http.StatusOK,
-			"ok",
-			userResponse,
-		),
-	)
+	helper.Success(c, http.StatusOK, "ok", userResponse)
 }
 
+// @Summary Patch User's Topup
+// @Description Patch User's Topup by Data Provided
+// @Tags Users
+// @Accept json
+// @Produce json
+// @Param data body input.UserPatchTopUpInput true "Patch User's Topup"
+// @Success 200 {object} helper.Response{data=response.UserPatchTopUpResponse}
+// @Router /users/topup [patch]
 func (h *userController) PatchTopUpUser(c *gin.Context) {
 	var input input.UserPatchTopUpInput
 
@@ -162,34 +144,28 @@ func (h *userController) PatchTopUpUser(c *gin.Context) {
 	)
 }
 
+// @Summary Register New Admin
+// @Description Register New Admin by Data Provided
+// @Tags Users
+// @Accept json
+// @Produce json
+// @Param data body input.UserRegisterInput true "Register Admin"
+// @Success 200 {object} helper.Response{data=response.UserRegisterResponse}
+// @Router /users/admin [post]
 func (h *userController) RegisterAdmin(c *gin.Context) {
 	var input input.UserRegisterInput
 
 	err := c.ShouldBindJSON(&input)
 	if err != nil {
 		errors := helper.GetErrorData(err)
-		c.JSON(
-			http.StatusUnprocessableEntity,
-			helper.NewErrorResponse(
-				http.StatusUnprocessableEntity,
-				"failed",
-				errors,
-			),
-		)
+		helper.Error(c, http.StatusUnprocessableEntity, "failed", errors)
 		return
 	}
 
 	userData, err := h.userService.RegisterAdmin(input)
 	if err != nil {
 		errors := helper.GetErrorData(err)
-		c.JSON(
-			http.StatusUnprocessableEntity,
-			helper.NewErrorResponse(
-				http.StatusUnprocessableEntity,
-				"failed",
-				errors,
-			),
-		)
+		helper.Error(c, http.StatusUnprocessableEntity, "failed", errors)
 		return
 	}
 
@@ -201,13 +177,5 @@ func (h *userController) RegisterAdmin(c *gin.Context) {
 		Balance:   userData.Balance,
 		CreatedAt: userData.CreatedAt,
 	}
-
-	c.JSON(
-		http.StatusCreated,
-		helper.NewResponse(
-			http.StatusCreated,
-			"created",
-			userResponse,
-		),
-	)
+	helper.Success(c, http.StatusCreated, "created", userResponse)
 }
